@@ -17,17 +17,26 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+This music recommender system uses a content-based approach to suggest songs based on a user's preferences. It compares song features like genre, mood, energy, and tempo to a user’s preferred values and assigns each song a score based on how closely it matches.
+Songs with matching genres and moods receive higher scores, while numerical features like energy and tempo are scored based on how close they are to the user’s preferences. The system then ranks songs by their scores and recommends the top results.
+In real-world systems, this approach is often combined with collaborative filtering, but this simulation focuses on matching song attributes to user taste.
 
-Some prompts to answer:
+### Features Used
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+**Song:**
+- genre
+- mood
+- energy
+- tempo_bpm
+- valence
+- danceability
+- acousticness
 
-You can include a simple diagram or bullet list if helpful.
+**UserProfile:**
+- preferred_genre
+- preferred_mood
+- preferred_energy
+- preferred_tempo
 
 ---
 

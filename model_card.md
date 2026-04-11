@@ -32,6 +32,20 @@ Prompts:
 
 Avoid code here. Pretend you are explaining the idea to a friend who does not program.
 
+This recommender system is inspired by how platforms like Spotify and YouTube suggest music.
+There are two main approaches. Collaborative filtering recommends songs based on what similar users enjoy. For example, if many users who like one song also listen to another, that second song may be recommended. Content-based filtering focuses on the characteristics of songs, such as genre, tempo, and mood. If a user likes calm acoustic songs, the system suggests similar tracks with those features.
+These systems use different types of data, including user interactions like plays, skips, likes, and playlist additions. They also use song attributes such as genre, energy, and tempo to understand music characteristics.
+Most real systems combine both approaches to build a taste profile and recommend songs that best match a user’s preferences. 
+From the songs.csv dataset, the available features include genre, mood, energy, tempo_bpm, valence, danceability, and acousticness.
+For a simple vibe-based recommender, the most useful features are mood, energy, valence, and tempo. Mood gives a direct idea of how a song feels, while energy and tempo describe how intense or fast it is. Valence helps capture whether a song sounds more positive or negative.
+Genre is also helpful for grouping similar types of music, while features like danceability and acousticness can add extra detail to the overall vibe.
+These features make sense because people often choose music based on how it feels, rather than just the artist or title.
+To recommend songs, the system gives each song a score based on how closely it matches the user’s preferences.
+For genre and mood, the scoring is simple. If the song matches the user’s preferred genre or mood, it earns more points.
+For numerical features like energy and tempo, the system checks how close the song is to the user’s preferred value. Songs with values closer to the preference receive higher scores, while songs that are farther away receive lower scores.
+The final score is a weighted combination of genre, mood, energy, and tempo. For example, mood and genre may have slightly higher weights because they strongly shape the overall vibe, while energy and tempo help fine-tune the match.
+After every song receives a score, the system ranks all songs from highest to lowest and recommends the top matches.
+
 ---
 
 ## 4. Data  

@@ -9,3 +9,10 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Desert Lanterns,Mirage Ensemble,world,meditative,0.30,68,0.45,0.32,0.92
+12,Glass Harbor,Piano Cartography,classical,contemplative,0.22,60,0.36,0.25,0.97
+13,Thunderstep,Forge & Tangle,post-rock,epic,0.88,140,0.39,0.54,0.12
+14,Velvet Alley,Siren Contrive,neo-soul,jubilant,0.65,98,0.83,0.70,0.48
+15,Sandstone Rituals,Taiga Drums,tribal,ritualistic,0.55,96,0.30,0.60,0.15
+16,Lantern Bloom,Azure Koto,ambient-traditional,dreamy,0.18,56,0.52,0.20,0.95
+17,Blue Delta,Old Harbor Band,blues,melancholic,0.46,84,0.22,0.46,0.38
