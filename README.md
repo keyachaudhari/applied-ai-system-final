@@ -20,6 +20,8 @@ Replace this paragraph with your own summary of what your version does.
 This music recommender system uses a content-based approach to suggest songs based on a user's preferences. It compares song features like genre, mood, energy, and tempo to a user’s preferred values and assigns each song a score based on how closely it matches.
 Songs with matching genres and moods receive higher scores, while numerical features like energy and tempo are scored based on how close they are to the user’s preferences. The system then ranks songs by their scores and recommends the top results.
 In real-world systems, this approach is often combined with collaborative filtering, but this simulation focuses on matching song attributes to user taste.
+The scoring system uses weighted rules. A song receives +2.0 points for a genre match and +1.0 point for a mood match. Additional similarity points are given based on how close the song’s energy, tempo, valence, danceability, and acousticness are to the user’s preferences. Songs are then ranked by total score, and the top results are recommended.
+This system may be biased toward genre and mood matches, which could cause it to overlook songs that match the user’s vibe in other ways. It also relies on a small dataset, so it may not represent all musical tastes.
 
 ### Features Used
 
@@ -39,6 +41,16 @@ In real-world systems, this approach is often combined with collaborative filter
 - preferred_tempo
 
 ---
+
+## Example Output
+
+![Recommender Output](output-screenshot.png)
+
+## Evaluation Results
+
+Here are the results of the recommender for different user profiles:
+
+![Evaluation Output](three-output-screenshot.png)
 
 ## Getting Started
 
@@ -77,26 +89,27 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+### Accuracy
+For the Chill Lofi profile, the recommendations felt accurate. Songs like *Midnight Coding* and *Library Rain* ranked highly because they matched both the genre and mood preferences, which have the highest weights in the scoring system.
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+### Why a song ranked first
+For example, *Midnight Coding* ranked first because it matched both genre (+2.0) and mood (+1.0). It also had very close values for energy, tempo, and acousticness, which added additional points and gave it the highest total score.
 
+### Surprises
+One surprising result was that some songs without a genre match still ranked relatively high. This happened because their numerical features (like energy and tempo) were very close to the user’s preferences, showing that similarity scoring can sometimes outweigh exact matches.
+
+### Experiment: Removing Mood Feature
+
+I tested the system by temporarily removing the mood match from the scoring function. After doing this, the rankings changed in noticeable ways. For the Chill Lofi profile, *Focus Flow* moved to the top, while *Midnight Coding* and *Library Rain* ranked slightly lower than before.
+
+This happened because the system relied more on numerical features like energy, tempo, and danceability once the mood bonus was removed. The results were not necessarily worse, but they felt a little less aligned with the overall vibe of the profile. This showed that mood is an important feature in my recommender because it helps capture the emotional feel of the music, not just the technical similarity.
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+This recommender system has several limitations. It relies on a small dataset, so it cannot represent all types of music or user preferences. The system also places strong weight on genre and mood, which can cause it to overlook songs that match the user’s vibe in other ways.
 
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
-
+Additionally, the system only considers numerical features like energy, tempo, valence, and danceability. It does not account for lyrics, cultural context, or personal listening history, which makes it less accurate compared to real-world recommendation systems.
 ---
 
 ## Reflection
@@ -105,10 +118,9 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+Through this project, I learned how recommender systems turn user preferences into numerical scores to rank items. Even simple rules like matching genre or comparing energy levels can produce reasonable recommendations.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+I also saw how bias can appear in systems like this. For example, giving too much weight to genre can limit diversity, while relying on a small dataset can restrict the variety of recommendations. This made me realize that real-world systems need much more data and more complex logic to be fair and accurate.
 
 
 ---
@@ -217,4 +229,6 @@ A few sentences about what you learned:
 - What surprised you about how your system behaved
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
+
+
 

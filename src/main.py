@@ -12,12 +12,11 @@ You will implement the functions in recommender.py:
 from src.recommender import load_songs, recommend_songs
 
 def main() -> None:
-    songs = load_songs("data/songs.csv") 
+    songs = load_songs("data/songs.csv")
 
-    # Starter example profile
-    user_prefs = {
-        "genre": "lofi", 
-        "mood": "chill", 
+    user1 = {
+        "genre": "lofi",
+        "mood": "chill",
         "energy": 0.4,
         "tempo": 80,
         "valence": 0.5,
@@ -25,16 +24,40 @@ def main() -> None:
         "danceability": 0.6
     }
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+    user2 = {
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.9,
+        "tempo": 130,
+        "valence": 0.8,
+        "acousticness": 0.2,
+        "danceability": 0.9
+    }
 
-    print("\nTop recommendations:\n")
-    for rec in recommendations:
-        # You decide the structure of each returned item.
-        # A common pattern is: (song, score, explanation)
-        song, score, explanation = rec
-        print(f"{song['title']} - Score: {score:.2f}")
-        print(f"Because: {explanation}")
-        print()
+    user3 = {
+        "genre": "rock",
+        "mood": "intense",
+        "energy": 0.95,
+        "tempo": 150,
+        "valence": 0.4,
+        "acousticness": 0.1,
+        "danceability": 0.6
+    }
+
+    profiles = [
+        ("Chill Lofi", user1),
+        ("High Energy Pop", user2),
+        ("Intense Rock", user3),
+    ]
+
+    for name, prefs in profiles:
+        print(f"\n=== {name} ===\n")
+        recommendations = recommend_songs(prefs, songs, k=5)
+
+        for song, score, explanation in recommendations:
+            print(f"{song['title']} - Score: {score:.2f}")
+            print(f"Because: {explanation}")
+            print()
 
 
 if __name__ == "__main__":
