@@ -74,6 +74,25 @@ def load_songs(csv_path: str) -> List[Dict]:
     print(f"Loaded songs: {len(songs)}")
     return songs
 
+def retrieve_songs(user_prefs: Dict, songs: List[Dict]) -> List[Dict]:
+    """Retrieve a smaller set of relevant songs before scoring."""
+
+    retrieved = []
+
+    for song in songs:
+        genre_match = song["genre"] == user_prefs["genre"]
+        mood_match = song["mood"] == user_prefs["mood"]
+
+        if genre_match or mood_match:
+            retrieved.append(song)
+
+    if not retrieved:
+        print("[Retriever] No exact genre or mood match found. Using full catalog.")
+        return songs
+
+    print(f"[Retriever] Retrieved {len(retrieved)} candidate songs.")
+    return retrieved
+
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     """Compute a score and explanation reasons for a song."""
     score = 0.0
@@ -83,9 +102,9 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         score += 2.0
         reasons.append("genre match (+2.0)")
 
-    #if song["mood"] == user_prefs["mood"]:
-     #   score += 1.0
-      #  reasons.append("mood match (+1.0)")
+    if song["mood"] == user_prefs["mood"]:
+        score += 1.0
+        reasons.append("mood match (+1.0)")
 
     energy_score = max(0, 1 - abs(song["energy"] - user_prefs["energy"]))
     score += energy_score
@@ -116,12 +135,19 @@ def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tup
     """Return top k scored songs with explanations."""
     scored_songs = []
 
-    for song in songs:
+    candidate_songs = retrieve_songs(user_prefs, songs)
+
+    for song in candidate_songs:
         score, reasons = score_song(user_prefs, song)
+
+        confidence = min(score / 8.0, 1.0)
+
         explanation = ", ".join(reasons)
+        explanation += f", confidence: {confidence:.2f}"
+
         scored_songs.append((song, score, explanation))
 
     scored_songs.sort(key=lambda item: item[1], reverse=True)
-        
-    return scored_songs[:k]
-    
+
+    print(f"[Recommender] Scored {len(candidate_songs)} songs and returning top {k}.")
+    return scored_songs[:k]    
