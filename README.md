@@ -225,6 +225,10 @@ During development, AI was helpful in suggesting how to structure the retrieval 
 
 ---
 
+## Demo Video
+
+[Watch my demo video here](https://drive.google.com/file/d/1gETLGvxyzCkajH0bnAdF58WN6U317SyV/view?usp=sharing)
+
 ## 7. `model_card_template.md`
 
 Combines reflection and model card framing from the Module 3 guidance. :contentReference[oaicite:2]{index=2}  
